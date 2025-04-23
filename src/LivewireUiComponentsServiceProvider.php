@@ -3,7 +3,7 @@
 namespace MrUi\LivewireUiComponents;
 
 use Illuminate\Support\ServiceProvider;
-use Livewire\Livewire;
+use Illuminate\Support\Facades\Blade;
 use MrUi\LivewireUiComponents\Components\Button;
 use MrUi\LivewireUiComponents\Components\Card;
 use MrUi\LivewireUiComponents\Components\Alert;
@@ -34,13 +34,14 @@ class LivewireUiComponentsServiceProvider extends ServiceProvider
             __DIR__.'/../resources/views' => resource_path('views/vendor/livewire-ui-components'),
         ], 'views');
 
-        // Load views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'mrui');
+        $prefix = config('livewire-ui-components.prefix');
 
-        // Register Livewire components
-        Livewire::component('mrui-button', Button::class);
-        Livewire::component('mrui-card', Card::class);
-        Livewire::component('mrui-alert', Alert::class);
-        Livewire::component('mrui-todo', Todo::class);
+        // Load views
+        $this->loadViewsFrom(__DIR__.'/../resources/views', $prefix);
+
+        // Register Blade components
+        Blade::component($prefix.'-button', Button::class);
+        Blade::component($prefix.'-card', Card::class);
+        Blade::component($prefix.'-alert', Alert::class);
     }
 } 

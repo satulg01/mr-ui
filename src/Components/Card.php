@@ -2,7 +2,9 @@
 
 namespace MrUi\LivewireUiComponents\Components;
 
-use Livewire\Component;
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
 
 class Card extends Component
 {
@@ -32,7 +34,7 @@ class Card extends Component
         $this->footerClass = $footerClass;
     }
     
-    public function render()
+    public function render(): View|Closure|string
     {
         return view('mrui::components.card');
     }

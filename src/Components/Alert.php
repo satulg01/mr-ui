@@ -2,7 +2,9 @@
 
 namespace MrUi\LivewireUiComponents\Components;
 
-use Livewire\Component;
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
 
 class Alert extends Component
 {
@@ -25,10 +27,6 @@ class Alert extends Component
         $this->message = $message;
         $this->dismissible = $dismissible;
         $this->timeout = $timeout;
-        
-        if ($this->timeout > 0) {
-            $this->dispatch('setTimeout', ['timeout' => $this->timeout]);
-        }
     }
     
     public function dismiss()
@@ -36,7 +34,7 @@ class Alert extends Component
         $this->show = false;
     }
     
-    public function render()
+    public function render(): View|Closure|string
     {
         return view('mrui::components.alert');
     }
